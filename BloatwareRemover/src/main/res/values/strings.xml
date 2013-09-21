@@ -8,4 +8,6 @@
 	<string name="tab_bloatware_title">Bloatware</string>
 	<string name="tab_system_apps_title">System Apps</string>
 
+	<string name="no_system_applications">No applications</string>
+
 </resources>
