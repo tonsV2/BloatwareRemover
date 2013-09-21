@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -22,9 +23,12 @@ import com.snot.bloatware.R;
  */
 public class BloatAppListLoader extends AppListLoader {
 
+	private List<String> bloatList;
+
 	public BloatAppListLoader(Context ctx) {
 		super(ctx);
-		String[] bloatList = ctx.getResources().getStringArray(R.array.bloatware);
+		String[] bloatArray = ctx.getResources().getStringArray(R.array.bloatware);
+		bloatList = Arrays.asList(bloatArray);
 	}
 
   @Override
@@ -63,7 +67,7 @@ public class BloatAppListLoader extends AppListLoader {
   }
 
 	private boolean isBloatPackage(ApplicationInfo applicationInfo) {
-		return((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
+		return bloatList.contains(applicationInfo.packageName);
 	}
 
 }
