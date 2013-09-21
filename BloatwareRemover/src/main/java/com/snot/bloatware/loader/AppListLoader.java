@@ -52,7 +52,17 @@ public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
     if (DEBUG) Log.i(TAG, "+++ loadInBackground() called! +++");
 
     // Retrieve all installed applications.
-    List<ApplicationInfo> apps = mPm.getInstalledApplications(0);
+    List<ApplicationInfo> allApps = mPm.getInstalledApplications(0);
+
+// Filter away user apps
+    List<ApplicationInfo> apps = new ArrayList<ApplicationInfo>();
+    for(ApplicationInfo applicationInfo : allApps)
+    {
+        if(isSystemPackage(applicationInfo))
+	{
+		apps.add(applicationInfo);
+	}
+    }
 
     if (apps == null) {
       apps = new ArrayList<ApplicationInfo>();
@@ -71,6 +81,10 @@ public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
 
     return entries;
   }
+
+	private boolean isSystemPackage(ApplicationInfo applicationInfo) {
+		return((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
+	}
 
   /*******************************************/
   /** (2) Deliver the results to the client **/
