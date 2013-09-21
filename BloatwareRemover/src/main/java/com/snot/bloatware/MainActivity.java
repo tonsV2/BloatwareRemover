@@ -10,8 +10,8 @@ public class MainActivity extends TabsFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		this.addTab("main", getString(R.string.tab_bloatware_title), BloatApplicationsFragment.class);
-		this.addTab("hist", getString(R.string.tab_system_apps_title), SystemApplicationsFragment.class);
+		this.addTab("bloat", getString(R.string.tab_bloatware_title), BloatApplicationsFragment.class);
+		this.addTab("sys", getString(R.string.tab_system_apps_title), SystemApplicationsFragment.class);
 
 		restoreFromSavedInstanceState(savedInstanceState);
 	}

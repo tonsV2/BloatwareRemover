@@ -1,6 +1,8 @@
 package com.snot.bloatware;
 
 import java.util.List;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import android.content.Context;
 import android.content.Intent;
@@ -84,7 +86,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		switch(item.getItemId())
 		{
 			case R.id.mark_bloat:
-				Toast.makeText(getActivity(), "mark: " + mAppEntry.toString(), Toast.LENGTH_SHORT).show();
+				markAsBloat(mAppEntry);
 				break;
 			case R.id.uninstall:
 				Toast.makeText(getActivity(), "uninstall", Toast.LENGTH_SHORT).show();
@@ -95,6 +97,22 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 			default:
 		}
 		return super.onContextItemSelected(item);
+	}
+
+	private void markAsBloat(AppEntry appEntry)
+	{
+		String to = getActivity().getString(R.string.mark_bloat_email_to);
+		String subject = getActivity().getString(R.string.mark_bloat_email_subject);
+		String message = appEntry.getLabel() + "\n";
+		message += appEntry.getApplicationInfo().packageName + "\n";
+		message += appEntry.getApplicationInfo().sourceDir;
+
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[] { to });
+		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		intent.putExtra(Intent.EXTRA_TEXT, message);
+		intent.setType("message/rfc822");
+		startActivity(intent);
 	}
 
 	/**********************/
