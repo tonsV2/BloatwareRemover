@@ -46,11 +46,16 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		getLoaderManager().initLoader(LOADER_ID, null, this);
 	}
 
+	@Override
+	public void onListItemClick(ListView list, View view, int position, long id) {
+		super.onListItemClick(list, view, position, id);
+		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
+		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
+	}
 
 	/**********************/
 	/** LOADER CALLBACKS **/
 	/**********************/
-	
 	@Override
 	public Loader<List<AppEntry>> onCreateLoader(int id, Bundle args) {
 		return new AppListLoader(getActivity());
