@@ -89,7 +89,9 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				markAsBloat(mAppEntry);
 				break;
 			case R.id.uninstall:
-				Toast.makeText(getActivity(), "uninstall", Toast.LENGTH_SHORT).show();
+			// TODO: confirm dialog
+			// TODO: confirm ret val and... toast soemthing
+				deleteSystemApp(mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			case R.id.freeze:
 				Toast.makeText(getActivity(), "freeze", Toast.LENGTH_SHORT).show();
@@ -97,6 +99,27 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 			default:
 		}
 		return super.onContextItemSelected(item);
+	}
+
+	private void deleteSystemApp(String app)
+	{
+		final String MOUNT_RW = "mount -o remount,rw -t rfs /dev/stl5 /system; \n";
+		final String MOUNT_RO = "mount -o remount,ro -t rfs /dev/stl5 /system; \n";
+		final String RM_APP = "rm -rf " + app + "; \n";
+		Process process;
+		try
+		{
+			process = Runtime.getRuntime().exec("su");
+			DataOutputStream os = new DataOutputStream(process.getOutputStream());
+			os.writeBytes(MOUNT_RW);
+			Toast.makeText(getActivity(), RM_APP, Toast.LENGTH_SHORT).show();
+			//os.writeBytes(RM_APP);
+			os.writeBytes(MOUNT_RO);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	private void markAsBloat(AppEntry appEntry)
