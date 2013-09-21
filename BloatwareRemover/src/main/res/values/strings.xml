@@ -12,7 +12,10 @@
 
 	<string name="header_title">Menu... TODO</string>
 	<string name="mark_bloat">Mark applications as bloat</string>
-	<string name="delete">Delete</string>
+	<string name="uninstall">Uninstall</string>
 	<string name="freeze">Freeze</string>
+
+	<string name="mark_bloat_email_to">sebastianthegreatful@gmail.com</string>
+	<string name="mark_bloat_email_subject">Please add the following app(s) to the bloatware list.</string>
 
 </resources>

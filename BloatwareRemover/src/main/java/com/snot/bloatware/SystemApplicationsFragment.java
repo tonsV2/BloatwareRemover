@@ -16,8 +16,10 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,8 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 1;
+
+	private int position;
 
 	public SystemApplicationsFragment() {
 	}
@@ -58,6 +62,10 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 //		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
 //		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
 
+// TODO: Store the position before opening the context menu.
+// This is needed since menuitem we access in onContextItemSelected isn't populated with this value.
+// This probably isnt a really nice solution
+		this.position = position;
 		getActivity().openContextMenu(list);
 	}
 
@@ -72,13 +80,14 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
+		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
 		switch(item.getItemId())
 		{
 			case R.id.mark_bloat:
-				Toast.makeText(getActivity(), "mark", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "mark: " + mAppEntry.toString(), Toast.LENGTH_SHORT).show();
 				break;
-			case R.id.delete:
-				Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
+			case R.id.uninstall:
+				Toast.makeText(getActivity(), "uninstall", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.freeze:
 				Toast.makeText(getActivity(), "freeze", Toast.LENGTH_SHORT).show();
@@ -116,7 +125,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-	inflater.inflate(R.menu.exercise_list, menu);
+	inflater.inflate(R.menu.main, menu);
     }
 }
 
