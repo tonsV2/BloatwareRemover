@@ -19,14 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snot.bloatware.loader.AppEntry;
-import com.snot.bloatware.loader.SysAppListLoader;
+import com.snot.bloatware.loader.BloatAppListLoader;
 
-public class SystemApplicationsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<AppEntry>> {
+public class BloatApplicationsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<AppEntry>> {
 
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 1;
 
-	public SystemApplicationsFragment() {
+	public BloatApplicationsFragment() {
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		super.onListItemClick(list, view, position, id);
 		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
-		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(getActivity(), mAppEntry.getApplicationInfo().packageName, Toast.LENGTH_SHORT).show();
 	}
 
 	/**********************/
@@ -58,7 +58,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	/**********************/
 	@Override
 	public Loader<List<AppEntry>> onCreateLoader(int id, Bundle args) {
-		return new SysAppListLoader(getActivity());
+		return new BloatAppListLoader(getActivity());
 	}
 	
 	@Override

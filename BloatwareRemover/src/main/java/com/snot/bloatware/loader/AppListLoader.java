@@ -20,8 +20,8 @@ import com.snot.bloatware.observer.SystemLocaleObserver;
  * containing all installed applications on the device.
  */
 public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
-  private static final String TAG = "ADP_AppListLoader";
-  private static final boolean DEBUG = true;
+  protected static final String TAG = "ADP_AppListLoader";
+  protected static final boolean DEBUG = false;
 
   final PackageManager mPm;
 
@@ -52,17 +52,7 @@ public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
     if (DEBUG) Log.i(TAG, "+++ loadInBackground() called! +++");
 
     // Retrieve all installed applications.
-    List<ApplicationInfo> allApps = mPm.getInstalledApplications(0);
-
-// Filter away user apps
-    List<ApplicationInfo> apps = new ArrayList<ApplicationInfo>();
-    for(ApplicationInfo applicationInfo : allApps)
-    {
-        if(isSystemPackage(applicationInfo))
-	{
-		apps.add(applicationInfo);
-	}
-    }
+    List<ApplicationInfo> apps = mPm.getInstalledApplications(0);
 
     if (apps == null) {
       apps = new ArrayList<ApplicationInfo>();
@@ -81,10 +71,6 @@ public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
 
     return entries;
   }
-
-	private boolean isSystemPackage(ApplicationInfo applicationInfo) {
-		return((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
-	}
 
   /*******************************************/
   /** (2) Deliver the results to the client **/
@@ -252,7 +238,7 @@ public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
    * Performs alphabetical comparison of {@link AppEntry} objects. This is
    * used to sort queried data in {@link loadInBackground}.
    */
-  private static final Comparator<AppEntry> ALPHA_COMPARATOR = new Comparator<AppEntry>() {
+  protected static final Comparator<AppEntry> ALPHA_COMPARATOR = new Comparator<AppEntry>() {
     Collator sCollator = Collator.getInstance();
 
     @Override
