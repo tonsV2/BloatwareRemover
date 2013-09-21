@@ -94,11 +94,34 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				deleteSystemApp(mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			case R.id.freeze:
-				Toast.makeText(getActivity(), "freeze", Toast.LENGTH_SHORT).show();
+			// TODO: confirm dialog
+			// TODO: confirm ret val
+				freezeSystemApp(mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			default:
 		}
 		return super.onContextItemSelected(item);
+	}
+
+	private void freezeSystemApp(String app)
+	{
+		final String MOUNT_RW = "mount -o remount,rw -t rfs /dev/stl5 /system; \n";
+		final String MOUNT_RO = "mount -o remount,ro -t rfs /dev/stl5 /system; \n";
+		final String MV_APP = "mv " + app + " " + app + ".frozen" + "; \n";
+		Process process;
+		try
+		{
+			process = Runtime.getRuntime().exec("su");
+			DataOutputStream os = new DataOutputStream(process.getOutputStream());
+			os.writeBytes(MOUNT_RW);
+			Toast.makeText(getActivity(), MV_APP, Toast.LENGTH_SHORT).show();
+			os.writeBytes(MV_APP);
+			os.writeBytes(MOUNT_RO);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	private void deleteSystemApp(String app)
