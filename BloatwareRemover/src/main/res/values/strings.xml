@@ -10,4 +10,9 @@
 
 	<string name="no_system_applications">No applications</string>
 
+	<string name="header_title">Menu... TODO</string>
+	<string name="mark_bloat">Mark applications as bloat</string>
+	<string name="delete">Delete</string>
+	<string name="freeze">Freeze</string>
+
 </resources>

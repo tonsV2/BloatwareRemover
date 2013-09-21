@@ -12,6 +12,10 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -29,19 +33,21 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	public SystemApplicationsFragment() {
 	}
 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 
+		ListView lv = getListView();
+		registerForContextMenu(lv);
+
 		mAdapter = new AppListAdapter(getActivity());
-		setEmptyText(getString(R.string.no_system_applications));
+		//setEmptyText(getString(R.string.no_system_applications));
 		setListAdapter(mAdapter);
-		setListShown(false);
 
 		getLoaderManager().initLoader(LOADER_ID, null, this);
 	}
@@ -49,8 +55,37 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		super.onListItemClick(list, view, position, id);
-		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
-		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
+//		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
+//		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
+
+		getActivity().openContextMenu(list);
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo)
+	{
+		super.onCreateContextMenu(menu, view, menuInfo);
+		menu.setHeaderTitle(getString(R.string.header_title));
+		MenuInflater inflater = getActivity().getMenuInflater();
+		inflater.inflate(R.menu.context_menu_system_applications, menu);
+	}
+
+	public boolean onContextItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+			case R.id.mark_bloat:
+				Toast.makeText(getActivity(), "mark", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.delete:
+				Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.freeze:
+				Toast.makeText(getActivity(), "freeze", Toast.LENGTH_SHORT).show();
+				break;
+			default:
+		}
+		return super.onContextItemSelected(item);
 	}
 
 	/**********************/
@@ -78,10 +113,10 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	}
 
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//	inflater.inflate(R.menu.exercise_list, menu);
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+	inflater.inflate(R.menu.exercise_list, menu);
+    }
 }
 
