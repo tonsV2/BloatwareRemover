@@ -32,7 +32,7 @@ import com.snot.bloatware.loader.SysAppListLoader;
 public class SystemApplicationsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<AppEntry>> {
 
 	private AppListAdapter mAdapter;
-	private static final int LOADER_ID = 1;
+	private static final int LOADER_ID = 2;
 
 	private int position;
 

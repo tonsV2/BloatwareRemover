@@ -32,6 +32,7 @@ public class FrozenAppListLoader extends AppListLoader {
 	public FrozenAppListLoader(Context ctx) {
 		super(ctx);
 		context = ctx;
+		Log.v(TAG, "Called!");
 	}
 
   @Override
@@ -54,9 +55,12 @@ public class FrozenAppListLoader extends AppListLoader {
 			PackageInfo packageInfo = pm.getPackageArchiveInfo(absolutePath, 0);
 			ApplicationInfo applicationInfo = packageInfo.applicationInfo;
 			// TODO: isn't it a bug that I manually have to assign the following?
+			// Some info here as well... but no solution beside manual assignment.
+			// http://stackoverflow.com/questions/5661418/get-apk-file-icon-version-name
 			applicationInfo.sourceDir = absolutePath;
 			applicationInfo.publicSourceDir = absolutePath;
 
+			Log.v(TAG, "applicationInfo: " + applicationInfo.toString());
 			apps.add(applicationInfo);
 		}
 	}

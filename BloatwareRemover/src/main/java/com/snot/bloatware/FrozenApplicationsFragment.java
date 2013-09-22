@@ -32,7 +32,7 @@ import com.snot.bloatware.loader.FrozenAppListLoader;
 public class FrozenApplicationsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<AppEntry>> {
 
 	private AppListAdapter mAdapter;
-	private static final int LOADER_ID = 1;
+	private static final int LOADER_ID = 3;
 
 	private int position;
 
@@ -70,7 +70,7 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 		super.onCreateContextMenu(menu, view, menuInfo);
 		menu.setHeaderTitle(getString(R.string.header_title));
 		MenuInflater inflater = getActivity().getMenuInflater();
-		inflater.inflate(R.menu.context_menu_system_applications, menu);
+		inflater.inflate(R.menu.context_menu_frozen_applications, menu);
 	}
 
 	public boolean onContextItemSelected(MenuItem item)
@@ -81,8 +81,8 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 			case R.id.uninstall:
 				uninstall(mAppEntry);
 				break;
-			case R.id.freeze:
-				AppUtils.unfreezeSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
+			case R.id.defrost:
+				AppUtils.defrostSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			default:
 		}
