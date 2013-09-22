@@ -103,28 +103,24 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	private void uninstall(final AppEntry appEntry)
 	{
-		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				switch (which)
-				{
-					case DialogInterface.BUTTON_POSITIVE:
-						AppUtils.deleteSystemApp(getActivity(), appEntry.getApplicationInfo().sourceDir);
-						break;
-
-					case DialogInterface.BUTTON_NEGATIVE:
-						//No button clicked
-						break;
-				}
-			}
-		};
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Uninstall?")
 		.setMessage("Are you sure?")
-		.setPositiveButton("Yes", dialogClickListener)
-		.setNegativeButton("No", dialogClickListener)
-		.show();	
+		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int whichButton) {
+					AppUtils.deleteSystemApp(getActivity(), appEntry.getApplicationInfo().sourceDir);
+					//dialog.dismiss();
+				}
+			}
+		)
+		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int whichButton) {
+				}
+			}
+		)
+		.show();
 	}
 
 
