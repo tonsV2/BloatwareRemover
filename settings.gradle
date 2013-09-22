@@ -1,1 +1,1 @@
-include ':BloatwareRemover'
+include ':BloatwareRemover', ':BloatwareRemover:libs:RootTools2.6'

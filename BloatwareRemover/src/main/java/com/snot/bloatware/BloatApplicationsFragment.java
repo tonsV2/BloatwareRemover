@@ -73,6 +73,7 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 	public boolean onContextItemSelected(MenuItem item)
 	{
 		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
+		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
 		switch(item.getItemId())
 		{
 			case R.id.info:
