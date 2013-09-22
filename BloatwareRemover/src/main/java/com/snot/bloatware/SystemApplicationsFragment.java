@@ -1,11 +1,11 @@
 package com.snot.bloatware;
 
 import java.util.List;
-import java.io.DataOutputStream;
-import java.io.IOException;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -89,61 +89,44 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				markAsBloat(mAppEntry);
 				break;
 			case R.id.uninstall:
-			// TODO: confirm dialog
-			// TODO: confirm ret val and... toast soemthing
-				deleteSystemApp(mAppEntry.getApplicationInfo().sourceDir);
+				uninstall(mAppEntry);
 				break;
 			case R.id.freeze:
 			// TODO: confirm dialog
 			// TODO: confirm ret val
-				freezeSystemApp(mAppEntry.getApplicationInfo().sourceDir);
+				AppUtils.freezeSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			default:
 		}
 		return super.onContextItemSelected(item);
 	}
 
-	private void freezeSystemApp(String app)
+	private void uninstall(final AppEntry appEntry)
 	{
-		final String MOUNT_RW = "mount -o remount,rw -t rfs /dev/stl5 /system; \n";
-		final String MOUNT_RO = "mount -o remount,ro -t rfs /dev/stl5 /system; \n";
-		final String MV_APP = "mv " + app + " " + app + ".frozen" + "; \n";
-		Process process;
-		try
-		{
-			process = Runtime.getRuntime().exec("su");
-			DataOutputStream os = new DataOutputStream(process.getOutputStream());
-			os.writeBytes(MOUNT_RW);
-			Toast.makeText(getActivity(), MV_APP, Toast.LENGTH_SHORT).show();
-			os.writeBytes(MV_APP);
-			os.writeBytes(MOUNT_RO);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which)
+				{
+					case DialogInterface.BUTTON_POSITIVE:
+						AppUtils.deleteSystemApp(getActivity(), appEntry.getApplicationInfo().sourceDir);
+						break;
+
+					case DialogInterface.BUTTON_NEGATIVE:
+						//No button clicked
+						break;
+				}
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle("Uninstall?")
+		.setMessage("Are you sure?")
+		.setPositiveButton("Yes", dialogClickListener)
+		.setNegativeButton("No", dialogClickListener)
+		.show();	
 	}
 
-	private void deleteSystemApp(String app)
-	{
-		final String MOUNT_RW = "mount -o remount,rw -t rfs /dev/stl5 /system; \n";
-		final String MOUNT_RO = "mount -o remount,ro -t rfs /dev/stl5 /system; \n";
-		final String RM_APP = "rm -rf " + app + "; \n";
-		Process process;
-		try
-		{
-			process = Runtime.getRuntime().exec("su");
-			DataOutputStream os = new DataOutputStream(process.getOutputStream());
-			os.writeBytes(MOUNT_RW);
-			Toast.makeText(getActivity(), RM_APP, Toast.LENGTH_SHORT).show();
-			//os.writeBytes(RM_APP);
-			os.writeBytes(MOUNT_RO);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
 
 	private void markAsBloat(AppEntry appEntry)
 	{
