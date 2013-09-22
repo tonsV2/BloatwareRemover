@@ -22,6 +22,7 @@ import com.snot.bloatware.R;
  * containing all installed applications on the device.
  */
 public class BloatAppListLoader extends AppListLoader {
+	private static final String TAG = "BloatAppListLoader";
 
 	private List<String> bloatList;
 

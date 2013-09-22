@@ -12,7 +12,7 @@ public class MainActivity extends TabsFragmentActivity {
 
 		this.addTab("bloat", getString(R.string.tab_bloatware_title), BloatApplicationsFragment.class);
 		this.addTab("sys", getString(R.string.tab_system_apps_title), SystemApplicationsFragment.class);
-		this.addTab("frozen", getString(R.string.tab_frozen_title), BloatApplicationsFragment.class);
+		this.addTab("frozen", getString(R.string.tab_frozen_title), FrozenApplicationsFragment.class);
 
 		restoreFromSavedInstanceState(savedInstanceState);
 	}

@@ -20,7 +20,7 @@ import com.snot.bloatware.observer.SystemLocaleObserver;
  * containing all installed applications on the device.
  */
 public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
-  protected static final String TAG = "ADP_AppListLoader";
+  private static final String TAG = "AppListLoader";
   protected static final boolean DEBUG = false;
 
   final PackageManager mPm;

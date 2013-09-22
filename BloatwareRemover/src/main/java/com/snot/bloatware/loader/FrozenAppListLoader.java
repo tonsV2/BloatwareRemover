@@ -5,43 +5,61 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Arrays;
+import java.io.File;
+import java.io.FilenameFilter;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.snot.bloatware.observer.InstalledAppsObserver;
 import com.snot.bloatware.observer.SystemLocaleObserver;
+import com.snot.bloatware.R;
 
 /**
  * An implementation of AsyncTaskLoader which loads a {@code List<AppEntry>}
  * containing all installed applications on the device.
  */
-public class SysAppListLoader extends AppListLoader {
-	private static final String TAG = "SysAppListLoader";
+public class FrozenAppListLoader extends AppListLoader {
 
-	public SysAppListLoader(Context ctx) {
+	private static final String TAG = "FrozenAppListLoader";
+	private Context context;
+
+	public FrozenAppListLoader(Context ctx) {
 		super(ctx);
+		context = ctx;
 	}
 
   @Override
   public List<AppEntry> loadInBackground() {
     if (DEBUG) Log.i(TAG, "+++ loadInBackground() called! +++");
 
-    // Retrieve all installed applications.
-    List<ApplicationInfo> allApps = mPm.getInstalledApplications(0);
+	List<ApplicationInfo> apps = new ArrayList<ApplicationInfo>();
+	// Retrive all frozen apps
+	// http://stackoverflow.com/questions/15598657/how-to-use-ls-c-command-in-java
+	// TODO: make prefix (.frozen) a setting
+	String path = "/system/app/";
+	String prefix = ".frozen";
+	File dir = new File(path);
+	File[] files = dir.listFiles();
+	PackageManager pm = context.getPackageManager();
+	for (int i = 0; i < files.length; i++) {
+		String absolutePath = files[i].getAbsolutePath();
+		if(absolutePath.endsWith(prefix))
+		{
+			PackageInfo packageInfo = pm.getPackageArchiveInfo(absolutePath, 0);
+			ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+			// TODO: isn't it a bug that I manually have to assign the following?
+			applicationInfo.sourceDir = absolutePath;
+			applicationInfo.publicSourceDir = absolutePath;
 
-// Filter away user apps
-    List<ApplicationInfo> apps = new ArrayList<ApplicationInfo>();
-    for(ApplicationInfo applicationInfo : allApps)
-    {
-        if(isSystemPackage(applicationInfo))
-	{
-		apps.add(applicationInfo);
+			apps.add(applicationInfo);
+		}
 	}
-    }
 
     if (apps == null) {
       apps = new ArrayList<ApplicationInfo>();
@@ -60,10 +78,5 @@ public class SysAppListLoader extends AppListLoader {
 
     return entries;
   }
-
-	private boolean isSystemPackage(ApplicationInfo applicationInfo) {
-		return((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
-	}
-
 }
 
