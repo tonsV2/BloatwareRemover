@@ -75,16 +75,16 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 	public boolean onContextItemSelected(MenuItem item)
 	{
 		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
-		Toast.makeText(getActivity(), mAppEntry.getApplicationInfo().packageName, Toast.LENGTH_SHORT).show();
 		switch(item.getItemId())
 		{
 			case R.id.uninstall:
 				uninstall(mAppEntry);
 				break;
 			case R.id.freeze:
-				AppUtils.freezeSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
+				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
 				break;
 			default:
+				Toast.makeText(getActivity(), "default", Toast.LENGTH_SHORT).show();
 				break;
 		}
 		return super.onContextItemSelected(item);
@@ -98,7 +98,7 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 		.setPositiveButton(getActivity().getString(R.string.dialog_delete_positive_button), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
-					AppUtils.deleteSystemApp(getActivity(), appEntry.getApplicationInfo().sourceDir);
+					AppUtils.deleteSystemApp(getActivity(), appEntry);
 					//dialog.dismiss();
 				}
 			}

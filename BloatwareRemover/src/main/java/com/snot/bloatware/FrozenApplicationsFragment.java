@@ -82,7 +82,7 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 				uninstall(mAppEntry);
 				break;
 			case R.id.defrost:
-				AppUtils.defrostSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
+				AppUtils.defrostSystemApp(getActivity(), mAppEntry);
 				break;
 			default:
 				break;
@@ -98,8 +98,7 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 		.setPositiveButton(getActivity().getString(R.string.dialog_delete_positive_button), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
-					AppUtils.deleteSystemApp(getActivity(), appEntry.getApplicationInfo().sourceDir);
-					//dialog.dismiss();
+					AppUtils.deleteSystemApp(getActivity(), appEntry);
 				}
 			}
 		)

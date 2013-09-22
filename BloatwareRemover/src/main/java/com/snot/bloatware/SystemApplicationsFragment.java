@@ -85,7 +85,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				uninstall(mAppEntry);
 				break;
 			case R.id.freeze:
-				AppUtils.freezeSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
+				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
 				break;
 			default:
 				break;
@@ -101,7 +101,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		.setPositiveButton(getActivity().getString(R.string.dialog_delete_positive_button), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
-					AppUtils.deleteSystemApp(getActivity(), appEntry.getApplicationInfo().sourceDir);
+					AppUtils.deleteSystemApp(getActivity(), appEntry);
 					//dialog.dismiss();
 				}
 			}
@@ -115,7 +115,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		.show();
 	}
 
-
+// TODO: creashes app... 
 	private void markAsBloat(AppEntry appEntry)
 	{
 		String to = getActivity().getString(R.string.mark_bloat_email_to);

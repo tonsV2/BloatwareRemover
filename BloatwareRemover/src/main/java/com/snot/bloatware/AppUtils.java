@@ -7,6 +7,7 @@ import android.content.Context;
 import android.widget.Toast;
 import android.util.Log;
 
+import com.snot.bloatware.loader.AppEntry;
 
 class AppUtils
 {
@@ -14,8 +15,9 @@ class AppUtils
 	private static final String MOUNT_RW = "mount -o remount,rw -t rfs /dev/stl5 /system;\n";
 	private static final String MOUNT_RO = "mount -o remount,ro -t rfs /dev/stl5 /system;\n";
 
-	public static void defrostSystemApp(Context context, String app)
+	public static void defrostSystemApp(Context context, final AppEntry appEntry)
 	{
+		final String app = appEntry.getApplicationInfo().sourceDir;
 		final String MV_APP = "mv " + app + " " + app.replace(".frozen", "") + ";\n";
 		Process process;
 		try
@@ -34,8 +36,9 @@ class AppUtils
 		}
 	}
 
-	public static void freezeSystemApp(Context context, String app)
+	public static void freezeSystemApp(final Context context, final AppEntry appEntry)
 	{
+		final String app = appEntry.getApplicationInfo().sourceDir;
 		final String MV_APP = "mv " + app + " " + app + ".frozen" + ";\n";
 		Process process;
 		try
@@ -54,8 +57,9 @@ class AppUtils
 		}
 	}
 
-	public static void deleteSystemApp(Context context, String app)
+	public static void deleteSystemApp(final Context context, final AppEntry appEntry)
 	{
+		final String app = appEntry.getApplicationInfo().sourceDir;
 		final String RM_APP = "rm -rf " + app + ";\n";
 		Process process;
 		try
