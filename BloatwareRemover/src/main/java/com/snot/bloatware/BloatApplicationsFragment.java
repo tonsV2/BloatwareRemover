@@ -56,8 +56,6 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		super.onListItemClick(list, view, position, id);
-		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
-		//Toast.makeText(getActivity(), mAppEntry.getApplicationInfo().packageName, Toast.LENGTH_SHORT).show();
 
 		this.position = position;
 		getActivity().openContextMenu(list);
@@ -77,17 +75,19 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
 		switch(item.getItemId())
 		{
+			case R.id.info:
+				AppUtils.info(getActivity(), mAppEntry);
+				return true;
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				break;
+				return true;
 			case R.id.freeze:
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
-				break;
+				return true;
 			default:
 				Toast.makeText(getActivity(), "default", Toast.LENGTH_SHORT).show();
-				break;
+				return super.onContextItemSelected(item);
 		}
-		return super.onContextItemSelected(item);
 	}
 
 	private void uninstall(final AppEntry appEntry)

@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.snot.bloatware.loader.AppEntry;
 import com.snot.bloatware.loader.SysAppListLoader;
 
+
 public class SystemApplicationsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<AppEntry>> {
 
 	private AppListAdapter mAdapter;
@@ -78,19 +79,21 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
 		switch(item.getItemId())
 		{
+			case R.id.info:
+				AppUtils.info(getActivity(), mAppEntry);
+				return true;
 			case R.id.mark_bloat:
-				markAsBloat(mAppEntry);
-				break;
+				AppUtils.markAsBloat(getActivity(), mAppEntry);
+				return true;
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				break;
+				return true;
 			case R.id.freeze:
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
-				break;
+				return true;
 			default:
-				break;
+				return super.onContextItemSelected(item);
 		}
-		return super.onContextItemSelected(item);
 	}
 
 	private void uninstall(final AppEntry appEntry)
@@ -102,7 +105,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
 					AppUtils.deleteSystemApp(getActivity(), appEntry);
-					//dialog.dismiss();
 				}
 			}
 		)
@@ -113,23 +115,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 			}
 		)
 		.show();
-	}
-
-// TODO: creashes app... 
-	private void markAsBloat(AppEntry appEntry)
-	{
-		String to = getActivity().getString(R.string.mark_bloat_email_to);
-		String subject = getActivity().getString(R.string.mark_bloat_email_subject);
-		String message = appEntry.getLabel() + "\n";
-		message += appEntry.getApplicationInfo().packageName + "\n";
-		message += appEntry.getApplicationInfo().sourceDir;
-
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_EMAIL, new String[] { to });
-		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		intent.putExtra(Intent.EXTRA_TEXT, message);
-		intent.setType("message/rfc822");
-		startActivity(intent);
 	}
 
 	/**********************/
