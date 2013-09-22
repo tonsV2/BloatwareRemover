@@ -12,7 +12,9 @@
 	<string name="no_system_applications">No applications</string>
 
 	<string name="header_title">Menu... TODO</string>
+	<string name="info">Info</string>
 	<string name="mark_bloat">Submit bloatware (Please contribute!)</string>
+	<string name="unmark_bloat">This app shouldn\'t be here!</string>
 	<string name="uninstall">Uninstall</string>
 	<string name="freeze">Freeze</string>
 	<string name="defrost">Defrost</string>

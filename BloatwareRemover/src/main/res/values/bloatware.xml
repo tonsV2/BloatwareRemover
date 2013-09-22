@@ -3,6 +3,7 @@
 	<string-array name="bloatware">
 		<item>com.andrew.apollo</item>
 		<item>org.cyanogenmod.focal</item>
+		<item>com.google.android.apps.genie.geniewidget</item>
 	</string-array>
 </resources>
 

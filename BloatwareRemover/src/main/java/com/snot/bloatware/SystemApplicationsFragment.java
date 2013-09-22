@@ -88,6 +88,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			default:
+				break;
 		}
 		return super.onContextItemSelected(item);
 	}

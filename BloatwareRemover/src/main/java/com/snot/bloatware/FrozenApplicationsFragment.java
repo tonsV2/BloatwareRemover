@@ -85,6 +85,7 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 				AppUtils.defrostSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			default:
+				break;
 		}
 		return super.onContextItemSelected(item);
 	}

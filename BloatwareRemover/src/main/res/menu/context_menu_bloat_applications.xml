@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/info" android:title="@string/info" />
+	<item android:id="@+id/uninstall" android:title="@string/uninstall" />
+	<item android:id="@+id/freezet" android:title="@string/freeze" />
+	<item android:id="@+id/unmark_bloat" android:title="@string/unmark_bloat" />
+</menu>
+
