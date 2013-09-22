@@ -39,10 +39,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	public SystemApplicationsFragment() {
 	}
 
-//	public void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//	}
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -52,7 +48,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		registerForContextMenu(lv);
 
 		mAdapter = new AppListAdapter(getActivity());
-		//setEmptyText(getString(R.string.no_system_applications));
 		setListAdapter(mAdapter);
 
 		getLoaderManager().initLoader(LOADER_ID, null, this);
@@ -61,8 +56,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		super.onListItemClick(list, view, position, id);
-//		AppEntry mAppEntry = (AppEntry)mAdapter.getItem(position);
-//		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
 
 // TODO: Store the position before opening the context menu.
 // This is needed since menuitem we access in onContextItemSelected isn't populated with this value.
@@ -92,8 +85,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				uninstall(mAppEntry);
 				break;
 			case R.id.freeze:
-			// TODO: confirm dialog
-			// TODO: confirm ret val
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry.getApplicationInfo().sourceDir);
 				break;
 			default:
