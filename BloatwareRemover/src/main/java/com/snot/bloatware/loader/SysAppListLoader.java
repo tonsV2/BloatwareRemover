@@ -24,6 +24,7 @@ public class SysAppListLoader extends AppListLoader {
 
 	public SysAppListLoader(Context ctx) {
 		super(ctx);
+		Log.v(TAG, "Called!");
 	}
 
   @Override

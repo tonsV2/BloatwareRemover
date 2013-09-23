@@ -28,6 +28,7 @@ public class BloatAppListLoader extends AppListLoader {
 
 	public BloatAppListLoader(Context ctx) {
 		super(ctx);
+		Log.v(TAG, "Called!");
 		String[] bloatArray = ctx.getResources().getStringArray(R.array.bloatware);
 		bloatList = Arrays.asList(bloatArray);
 	}
