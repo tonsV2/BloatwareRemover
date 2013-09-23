@@ -2,6 +2,8 @@ package com.snot.bloatware;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.InterruptedException;
+import java.util.concurrent.TimeoutException;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -10,6 +12,10 @@ import android.widget.Toast;
 import android.util.Log;
 import android.net.Uri;
 import android.content.Intent;
+
+import com.stericson.RootTools.RootTools;
+import com.stericson.RootTools.execution.Command;
+import com.stericson.RootTools.exceptions.RootDeniedException;
 
 import com.snot.bloatware.loader.AppEntry;
 
@@ -20,6 +26,16 @@ class AppUtils
 	private static final String MOUNT_RW = "mount -o remount,rw -t rfs /dev/stl5 /system;\n";
 	private static final String MOUNT_RO = "mount -o remount,ro -t rfs /dev/stl5 /system;\n";
 
+
+	public static void unmarkAsBloat(Context context, AppEntry appEntry)
+	{
+		String to = context.getString(R.string.mark_bloat_email_to);
+		String subject = context.getString(R.string.unmark_bloat_email_subject);
+		String message = appEntry.getLabel() + "\n";
+		message += appEntry.getApplicationInfo().packageName + "\n";
+		message += appEntry.getApplicationInfo().sourceDir;
+		composeMail(context, to, subject, message);
+	}
 
 	public static void markAsBloat(Context context, AppEntry appEntry)
 	{
@@ -56,67 +72,57 @@ class AppUtils
 		}
 	}
 
-	public static void defrostSystemApp(Context context, final AppEntry appEntry)
+	public static void execRoot(String cmd)
 	{
-		final String app = appEntry.getApplicationInfo().sourceDir;
-		final String MV_APP = "mv " + app + " " + app.replace(".frozen", "") + ";\n";
-		Process process;
+		Command command = new Command(0, MOUNT_RW, cmd, MOUNT_RO)
+		{
+			@Override
+			public void output(int id, String line)
+			{
+				Log.v(TAG, id + ":" + line);
+			}
+		};
 		try
 		{
-			process = Runtime.getRuntime().exec("su");
-			DataOutputStream os = new DataOutputStream(process.getOutputStream());
-			os.writeBytes(MOUNT_RW);
-			//Toast.makeText(context, MV_APP, Toast.LENGTH_SHORT).show();
-			Log.v(TAG, MV_APP);
-			os.writeBytes(MV_APP);
-			os.writeBytes(MOUNT_RO);
+			RootTools.getShell(true).add(command).waitForFinish();
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
+		catch(TimeoutException e)
+		{
+			e.printStackTrace();
+		}
+		catch(InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		catch(RootDeniedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void defrostSystemApp(Context context, final AppEntry appEntry)
+	{
+		final String app = appEntry.getApplicationInfo().sourceDir;
+		final String MV_APP = "mv " + app + " " + app.replace(".frozen", "") + ";\n";
+		execRoot(MV_APP);
 	}
 
 	public static void freezeSystemApp(final Context context, final AppEntry appEntry)
 	{
 		final String app = appEntry.getApplicationInfo().sourceDir;
 		final String MV_APP = "mv " + app + " " + app + ".frozen" + ";\n";
-		Process process;
-		try
-		{
-			process = Runtime.getRuntime().exec("su");
-			DataOutputStream os = new DataOutputStream(process.getOutputStream());
-			os.writeBytes(MOUNT_RW);
-			//Toast.makeText(context, MV_APP, Toast.LENGTH_SHORT).show();
-			Log.v(TAG, MV_APP);
-			os.writeBytes(MV_APP);
-			os.writeBytes(MOUNT_RO);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		execRoot(MV_APP);
 	}
 
 	public static void deleteSystemApp(final Context context, final AppEntry appEntry)
 	{
 		final String app = appEntry.getApplicationInfo().sourceDir;
 		final String RM_APP = "rm -rf " + app + ";\n";
-		Process process;
-		try
-		{
-			process = Runtime.getRuntime().exec("su");
-			DataOutputStream os = new DataOutputStream(process.getOutputStream());
-			os.writeBytes(MOUNT_RW);
-			//Toast.makeText(context, RM_APP, Toast.LENGTH_SHORT).show();
-			Log.v(TAG, RM_APP);
-			//os.writeBytes(RM_APP);
-			os.writeBytes(MOUNT_RO);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		execRoot(RM_APP);
 	}
 }
 

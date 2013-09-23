@@ -21,6 +21,7 @@
 
 	<string name="mark_bloat_email_to">sebastianthegreatful@gmail.com</string>
 	<string name="mark_bloat_email_subject">Please add the following app(s) to the bloatware list.</string>
+	<string name="unmark_bloat_email_subject">Please remove the following app(s) to the bloatware list.</string>
 
 	<string name="dialog_delete_title">Uninstall!</string>
 	<string name="dialog_delete_message">Are you sure?</string>

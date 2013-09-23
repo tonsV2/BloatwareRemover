@@ -85,6 +85,9 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 			case R.id.freeze:
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
 				return true;
+			case R.id.unmark_bloat:
+				AppUtils.unmarkAsBloat(getActivity(), mAppEntry);
+				return true;
 			default:
 				Toast.makeText(getActivity(), "default", Toast.LENGTH_SHORT).show();
 				return super.onContextItemSelected(item);
