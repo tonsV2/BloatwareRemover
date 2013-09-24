@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.snot.bloatware.loader.AppEntry;
 import com.snot.bloatware.loader.BloatAppListLoader;
@@ -31,8 +32,6 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 1;
-
-	private int position;
 
 	public BloatApplicationsFragment() {
 	}
@@ -54,11 +53,11 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 	}
 
 	@Override
-	public void onListItemClick(ListView list, View view, int position, long id) {
-		super.onListItemClick(list, view, position, id);
-
-		this.position = position;
-		getActivity().openContextMenu(list);
+	public void onListItemClick(ListView listView, View view, int position, long id) {
+		View childView = listView.getChildAt(position);
+		if(childView != null) {
+			listView.showContextMenuForChild(childView);
+		}
 	}
 
 	@Override
@@ -72,26 +71,25 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
-		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
-		Toast.makeText(getActivity(), mAppEntry.toString(), Toast.LENGTH_SHORT).show();
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+
 		switch(item.getItemId())
 		{
 			case R.id.info:
 				AppUtils.info(getActivity(), mAppEntry);
-				return true;
+				break;
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				return true;
+				break;
 			case R.id.freeze:
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
-				return true;
+				break;
 			case R.id.unmark_bloat:
 				AppUtils.unmarkAsBloat(getActivity(), mAppEntry);
-				return true;
-			default:
-				Toast.makeText(getActivity(), "default", Toast.LENGTH_SHORT).show();
-				return super.onContextItemSelected(item);
+				break;
 		}
+		return super.onContextItemSelected(item);
 	}
 
 	private void uninstall(final AppEntry appEntry)

@@ -25,6 +25,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.snot.bloatware.loader.AppEntry;
 import com.snot.bloatware.loader.FrozenAppListLoader;
@@ -33,8 +34,6 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 3;
-
-	private int position;
 
 	public FrozenApplicationsFragment() {
 	}
@@ -56,14 +55,11 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 	}
 
 	@Override
-	public void onListItemClick(ListView list, View view, int position, long id) {
-		super.onListItemClick(list, view, position, id);
-
-// TODO: Store the position before opening the context menu.
-// This is needed since menuitem we access in onContextItemSelected isn't populated with this value.
-// This probably isnt a really nice solution
-		this.position = position;
-		getActivity().openContextMenu(list);
+	public void onListItemClick(ListView listView, View view, int position, long id) {
+		View childView = listView.getChildAt(position);
+		if(childView != null) {
+			listView.showContextMenuForChild(childView);
+		}
 	}
 
 	@Override
@@ -77,18 +73,19 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
-		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(this.position);
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+
 		switch(item.getItemId())
 		{
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				return true;
+				break;
 			case R.id.defrost:
 				AppUtils.defrostSystemApp(getActivity(), mAppEntry);
-				return true;
-			default:
-				return super.onContextItemSelected(item);
+				break;
 		}
+		return super.onContextItemSelected(item);
 	}
 
 	private void uninstall(final AppEntry appEntry)
