@@ -10,9 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import com.adp.loadercustom.R;
-//import com.snot.bloatware.MainActivity.AppListFragment;
-//import com.snot.bloatware.SystemApplicationsFragment;
 import com.snot.bloatware.loader.AppEntry;
 
 /**
