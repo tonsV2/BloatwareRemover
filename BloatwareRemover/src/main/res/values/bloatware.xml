@@ -6,6 +6,7 @@
 		<item>com.google.android.apps.genie.geniewidget</item>
 
 <!-- http://www.s3forums.com/forum/galaxy-s3-apps/434-bloatware-applications-safe-remove-root-required.html -->
+<!--
 		<item>com.android.calendar</item>
 		<item>com.android.email</item>
 		<item>com.android.exchange</item>
@@ -105,6 +106,7 @@
 		<item>com.vlingo.midas</item>
 		<item>com.wssnps</item>
 		<item>com.wssyncmldm</item>
+-->
 	</string-array>
 </resources>
 
