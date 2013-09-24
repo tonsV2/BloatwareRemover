@@ -122,7 +122,7 @@ class AppUtils
 	{
 		final String app = appEntry.getApplicationInfo().sourceDir;
 		final String RM_APP = "rm -rf " + app + ";\n";
-		execRoot(RM_APP);
+		//execRoot(RM_APP);
 	}
 }
 
