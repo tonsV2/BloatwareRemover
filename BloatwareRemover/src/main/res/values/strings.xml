@@ -10,6 +10,8 @@
 	<string name="tab_frozen_title">Frozen</string>
 
 	<string name="no_system_applications">No applications</string>
+	<string name="no_bloatware_applications">No bloatware found</string>
+	<string name="no_frozen_applications">No frozen applications</string>
 
 	<string name="header_title">Menu... TODO</string>
 	<string name="info">Info</string>

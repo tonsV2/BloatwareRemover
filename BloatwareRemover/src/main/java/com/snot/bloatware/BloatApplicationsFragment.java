@@ -46,7 +46,7 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 		registerForContextMenu(lv);
 
 		mAdapter = new AppListAdapter(getActivity());
-		setEmptyText(getString(R.string.no_system_applications));
+		setEmptyText(getString(R.string.no_bloatware_applications));
 		setListAdapter(mAdapter);
 		setListShown(false);
 

@@ -44,6 +44,8 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 
+		setEmptyText(getString(R.string.no_frozen_applications));
+
 		ListView lv = getListView();
 		registerForContextMenu(lv);
 
