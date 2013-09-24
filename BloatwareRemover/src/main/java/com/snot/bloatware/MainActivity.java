@@ -4,9 +4,19 @@ import android.content.DialogInterface;
 import android.content.Context;
 import android.app.AlertDialog;
 import android.app.Activity;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +34,13 @@ public class MainActivity extends TabsFragmentActivity {
 
 		checkRoot();
 
-		this.addTab("bloat", getString(R.string.tab_bloatware_title), BloatApplicationsFragment.class);
-		this.addTab("sys", getString(R.string.tab_system_apps_title), SystemApplicationsFragment.class);
-		this.addTab("frozen", getString(R.string.tab_frozen_title), FrozenApplicationsFragment.class);
+		this.addTab(getString(R.string.tab_bloatware_title), new BloatApplicationsFragment());
+		this.addTab(getString(R.string.tab_system_apps_title), new SystemApplicationsFragment());
+		this.addTab(getString(R.string.tab_frozen_title), new FrozenApplicationsFragment());
 
-		restoreFromSavedInstanceState(savedInstanceState);
+//		restoreFromSavedInstanceState(savedInstanceState);
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,7 +48,7 @@ public class MainActivity extends TabsFragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	public void checkRoot()
 	{
 		final SharedPreferences settings = getSharedPreferences(MainActivity.class.getSimpleName(), Context.MODE_PRIVATE);
