@@ -4,6 +4,107 @@
 		<item>com.andrew.apollo</item>
 		<item>org.cyanogenmod.focal</item>
 		<item>com.google.android.apps.genie.geniewidget</item>
+
+<!-- http://www.s3forums.com/forum/galaxy-s3-apps/434-bloatware-applications-safe-remove-root-required.html -->
+		<item>com.android.calendar</item>
+		<item>com.android.email</item>
+		<item>com.android.exchange</item>
+		<item>com.android.facelock</item>
+		<item>com.android.MtpApplication</item>
+		<item>com.android.nfc</item>
+		<item>com.android.phasebeam</item>
+		<item>com.android.providers.applications</item>
+		<item>com.android.providers.drm</item>
+		<item>com.android.server.device.enterprise</item>
+		<item>com.android.server.vpn.enterprise</item>
+		<item>com.android.settings.mt</item>
+		<item>com.android.vpndialogs</item>
+		<item>com.google.android.apps.uploader</item>
+		<item>com.google.android.feedback</item>
+		<item>com.google.android.marvin.talkback</item>
+		<item>com.google.android.syncadapters.bookmarks</item>
+		<item>com.lifevibes.trimapp</item>
+		<item>com.monotype.android.font.chococooky</item>
+		<item>com.monotype.android.font.helvneuelt</item>
+		<item>com.monotype.android.font.rosemary</item>
+		<item>com.osp.app.signin</item>
+		<item>com.samsung.android.app.divx</item>
+		<item>com.samsung.android.livewallpaper.deepsea</item>
+		<item>com.samsung.app.playreadyui</item>
+		<item>com.samsung.map</item>
+		<item>com.samsung.music</item>
+		<item>com.samsung.SMT</item>
+		<item>com.sec.android.allshare.framework</item>
+		<item>com.sec.android.app.allsharedmc</item>
+		<item>com.sec.android.app.bluetoothtest</item>
+		<item>com.sec.android.app.factorymode</item>
+		<item>com.sec.android.app.FileShareClient</item>
+		<item>com.sec.android.app.FileShareServer</item>
+		<item>com.sec.android.app.gamehub</item>
+		<item>com.sec.android.app.kieswifi</item>
+		<item>com.sec.android.app.launcher</item>
+		<item>com.sec.android.app.lcdtest</item>
+		<item>com.sec.android.app.minimode.res</item>
+		<item>com.sec.android.app.mobileprint</item>
+		<item>com.sec.android.app.moreservices</item>
+		<item>com.sec.android.app.myfiles</item>
+		<item>com.sec.android.app.nfctest</item>
+		<item>com.sec.android.app.popupcalculator</item>
+		<item>com.sec.android.app.popupuireceiver</item>
+		<item>com.sec.android.app.samsungapps</item>
+		<item>com.sec.android.app.samsungapps.una2</item>
+		<item>com.sec.android.app.SecSetupWizard</item>
+		<item>com.sec.android.app.selftestmode1</item>
+		<item>com.sec.android.app.servicemodeapp</item>
+		<item>com.sec.android.app.shareapp</item>
+		<item>com.sec.android.app.sns</item>
+		<item>com.sec.android.app.sysscope</item>
+		<item>com.sec.android.app.twdvfs</item>
+		<item>com.sec.android.app.wallpaperchooser</item>
+		<item>com.sec.android.app.wfdbroker</item>
+		<item>com.sec.android.app.wlantest</item>
+		<item>com.sec.android.daemonapp.ap.accuweather</item>
+		<item>com.sec.android.daemonapp.ap.yahoonews</item>
+		<item>com.sec.android.daemonapp.ap.yahoostock.stockclock</item>
+		<item>com.sec.android.directshare</item>
+		<item>com.sec.android.fotaclient</item>
+		<item>com.sec.android.fwupgrade</item>
+		<item>com.sec.android.inputmethod</item>
+		<item>com.sec.android.Kies</item>
+		<item>com.sec.android.nearby.mediaserver</item>
+		<item>com.sec.android.provider.smemo</item>
+		<item>com.sec.android.providers.downloads</item>
+		<item>com.sec.android.saslideshow</item>
+		<item>com.sec.android.sCloudBackupApp</item>
+		<item>com.sec.android.sCloudBackupProvider</item>
+		<item>com.sec.android.sCloudRelayData</item>
+		<item>com.sec.android.sCloudSync</item>
+		<item>com.sec.android.widgetapp.analogclocksimple</item>
+		<item>com.sec.android.widgetapp.analogclockunique</item>
+		<item>com.sec.android.widgetapp.ap.hero.accuweather</item>
+		<item>com.sec.android.widgetapp.ap.hero.accuweather.widg et</item>
+		<item>com.sec.android.widgetapp.ap.yahoonews</item>
+		<item>com.sec.android.widgetapp.ap.yahoostock.stockclock</item>
+		<item>com.sec.android.widgetapp.digitalclock</item>
+		<item>com.sec.android.widgetapp.diotek.smemo</item>
+		<item>com.sec.android.widgetapp.dualclockanalog</item>
+		<item>com.sec.android.widgetapp.dualclockdigital</item>
+		<item>com.sec.android.widgetapp.SPlannerAppWidget</item>
+		<item>com.sec.android.widgetapp.webmanual</item>
+		<item>com.sec.ccl.csp.app.secretwallpaper.themetwo</item>
+		<item>com.sec.chaton</item>
+		<item>com.sec.dsm.phone</item>
+		<item>com.sec.dsm.system</item>
+		<item>com.sec.enterprise.permissions</item>
+		<item>com.sec.factory</item>
+		<item>com.sec.pcw</item>
+		<item>com.sec.phone</item>
+		<item>com.sec.spp.push</item>
+		<item>com.smlds</item>
+		<item>com.tgrape.android.radar</item>
+		<item>com.vlingo.midas</item>
+		<item>com.wssnps</item>
+		<item>com.wssyncmldm</item>
 	</string-array>
 </resources>
 
