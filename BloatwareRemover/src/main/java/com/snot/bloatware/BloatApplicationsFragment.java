@@ -44,10 +44,11 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 		ListView lv = getListView();
 		registerForContextMenu(lv);
 
-		mAdapter = new AppListAdapter(getActivity());
 		setEmptyText(getString(R.string.no_bloatware_applications));
-		setListAdapter(mAdapter);
 		setListShown(false);
+
+		mAdapter = new AppListAdapter(getActivity());
+		setListAdapter(mAdapter);
 
 		getLoaderManager().initLoader(LOADER_ID, null, this);
 	}
@@ -78,16 +79,16 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 		{
 			case R.id.info:
 				AppUtils.info(getActivity(), mAppEntry);
-				break;
+				return true;
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				break;
+				return true;
 			case R.id.freeze:
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
-				break;
+				return true;
 			case R.id.unmark_bloat:
 				AppUtils.unmarkAsBloat(getActivity(), mAppEntry);
-				break;
+				return true;
 		}
 		return super.onContextItemSelected(item);
 	}

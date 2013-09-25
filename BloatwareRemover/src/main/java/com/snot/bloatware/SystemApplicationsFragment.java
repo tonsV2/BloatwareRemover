@@ -79,16 +79,16 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		{
 			case R.id.info:
 				AppUtils.info(getActivity(), mAppEntry);
-				break;
+				return true;
 			case R.id.mark_bloat:
 				AppUtils.markAsBloat(getActivity(), mAppEntry);
-				break;
+				return true;
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				break;
+				return true;
 			case R.id.freeze:
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
-				break;
+				return true;
 		}
 		return super.onContextItemSelected(item);
 	}

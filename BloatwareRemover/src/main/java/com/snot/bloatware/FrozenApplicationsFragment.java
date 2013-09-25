@@ -80,10 +80,10 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 		{
 			case R.id.uninstall:
 				uninstall(mAppEntry);
-				break;
+				return true;
 			case R.id.defrost:
 				AppUtils.defrostSystemApp(getActivity(), mAppEntry);
-				break;
+				return true;
 		}
 		return super.onContextItemSelected(item);
 	}
