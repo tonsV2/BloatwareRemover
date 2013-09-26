@@ -48,7 +48,7 @@ public class TabsFragmentActivity extends FragmentActivity implements ActionBar.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_tabs_pager);
+		setContentView(R.layout.tabs_activity);
 
 		ta = new TabsAdapter(getSupportFragmentManager());
 
