@@ -72,6 +72,7 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
+	if (getUserVisibleHint()) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
 		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
 
@@ -91,6 +92,9 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 				return true;
 		}
 		return super.onContextItemSelected(item);
+	} else {
+		return false;
+	}
 	}
 
 	private void uninstall(final AppEntry appEntry)

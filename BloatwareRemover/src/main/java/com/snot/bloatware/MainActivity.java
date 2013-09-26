@@ -38,7 +38,6 @@ public class MainActivity extends TabsFragmentActivity {
 		this.addTab(getString(R.string.tab_system_apps_title), new SystemApplicationsFragment());
 		this.addTab(getString(R.string.tab_frozen_title), new FrozenApplicationsFragment());
 
-//		restoreFromSavedInstanceState(savedInstanceState);
 	}
 
 

@@ -72,6 +72,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
+	if (getUserVisibleHint()) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
 		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
 
@@ -91,6 +92,9 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				return true;
 		}
 		return super.onContextItemSelected(item);
+	} else {
+		return false;
+	}
 	}
 
 	private void uninstall(final AppEntry appEntry)
