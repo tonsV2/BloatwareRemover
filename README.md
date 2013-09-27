@@ -11,5 +11,5 @@ The server side is open source as well but I'd like to clean it up a bit before 
 
 Contact
 =======
-sebastianthegreatful@gmail.com
+<sebastianthegreatful@gmail.com>
 
