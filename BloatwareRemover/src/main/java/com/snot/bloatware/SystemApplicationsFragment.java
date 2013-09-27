@@ -91,7 +91,8 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
 				return true;
 		}
-		return super.onContextItemSelected(item);
+		//return super.onContextItemSelected(item);
+		return true;
 	} else {
 		return false;
 	}

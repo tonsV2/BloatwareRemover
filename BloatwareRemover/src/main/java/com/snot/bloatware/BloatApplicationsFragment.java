@@ -91,7 +91,8 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 				AppUtils.unmarkAsBloat(getActivity(), mAppEntry);
 				return true;
 		}
-		return super.onContextItemSelected(item);
+		//return super.onContextItemSelected(item);
+		return true;
 	} else {
 		return false;
 	}

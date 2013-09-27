@@ -86,7 +86,8 @@ public class FrozenApplicationsFragment extends ListFragment implements LoaderMa
 				AppUtils.defrostSystemApp(getActivity(), mAppEntry);
 				return true;
 		}
-		return super.onContextItemSelected(item);
+		//return super.onContextItemSelected(item);
+		return true;
 	} else {
 		return false;
 	}
