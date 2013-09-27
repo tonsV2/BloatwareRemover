@@ -4,6 +4,11 @@ This app lets you request the location of others by sending them a text message 
 
 Works with all smart phones including Iphone. The receiver doesn't need to have the app installed.
 
+Download
+========
+<https://play.google.com/store/apps/details?id=com.snot.whereareyou>
+
+
 Open Source
 ===========
 You can find the source code for this app at https://bitbucket.org/snot/where-are-you
