@@ -4,6 +4,17 @@
 		<item>com.andrew.apollo</item>
 		<item>org.cyanogenmod.focal</item>
 		<item>com.google.android.apps.genie.geniewidget</item>
+		<item>com.android.calendar</item>
+		<item>com.android.providers.calendar</item>
+		<item>com.android.email</item>
+		<item>com.android.exchange</item>
+		<item>com.google.android.youtube</item>
+		<item>com.google.android.inputmethod.korean</item>
+		<item>com.google.android.apps.inputmethod.hindi</item>
+		<item>com.google.android.inputmethod.pinyin</item>
+		<item>com.google.android.gallery3d</item>
+		<item>com.android.videoeditor</item>
+
 
 <!-- http://www.s3forums.com/forum/galaxy-s3-apps/434-bloatware-applications-safe-remove-root-required.html -->
 <!--
