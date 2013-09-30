@@ -2,11 +2,18 @@ Bloatware Remover
 =================
 This app lets you remove or freeze system apps.
 
+
+Requirement
+===========
+In order for this app to work root access is required.
+
+
 Features
 ========
 * Delete system apps
 * Freeze system apps
 * Detect bloatware (comes with list of know bloatware)
+
 
 Download
 ========
