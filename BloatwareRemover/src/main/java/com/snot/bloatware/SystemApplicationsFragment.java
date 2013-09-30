@@ -36,6 +36,9 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 2;
 
+	private int position;
+	private AppEntry appEntry;
+
 	public SystemApplicationsFragment() {
 	}
 
@@ -55,9 +58,18 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
+//		AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(position);
+		this.position = position;
+		this.appEntry = (AppEntry)getListView().getItemAtPosition(position);
+		Toast.makeText(getActivity(), position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
+
 		View childView = listView.getChildAt(position);
 		if(childView != null) {
 			listView.showContextMenuForChild(childView);
+		}
+		else
+		{
+			Toast.makeText(getActivity(), "childView == null", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -74,24 +86,25 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	{
 	if (getUserVisibleHint()) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+		AppEntry appEntry_should_be_working = (AppEntry)getListView().getItemAtPosition(info.position);
+		Toast.makeText(getActivity(), info.position + ":" + appEntry_should_be_working.toString(), Toast.LENGTH_SHORT).show();
 
 		switch(item.getItemId())
 		{
 			case R.id.info:
-				AppUtils.info(getActivity(), mAppEntry);
+				AppUtils.info(getActivity(), appEntry);
 				return true;
 			case R.id.mark_bloat:
-				AppUtils.markAsBloat(getActivity(), mAppEntry);
+				AppUtils.markAsBloat(getActivity(), appEntry);
 				return true;
 			case R.id.uninstall:
-				uninstall(mAppEntry);
+				uninstall(appEntry);
 				return true;
 			case R.id.freeze:
-				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
+				AppUtils.freezeSystemApp(getActivity(), appEntry);
 				return true;
 		}
-		//return super.onContextItemSelected(item);
+//		return super.onContextItemSelected(item);
 		return true;
 	} else {
 		return false;
