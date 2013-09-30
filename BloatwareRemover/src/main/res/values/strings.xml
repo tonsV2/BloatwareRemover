@@ -21,7 +21,7 @@
 	<string name="freeze">Freeze</string>
 	<string name="defrost">Defrost</string>
 
-	<string name="mark_bloat_email_to">sebastianthegreatful@gmail.com</string>
+	<string name="mark_bloat_email_to">sebastianthegreatful+bloatware@gmail.com</string>
 	<string name="mark_bloat_email_subject">Please add the following app(s) to the bloatware list.</string>
 	<string name="unmark_bloat_email_subject">Please remove the following app(s) to the bloatware list.</string>
 
