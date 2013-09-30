@@ -72,30 +72,30 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
-	if (getUserVisibleHint()) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-		AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
-
-		switch(item.getItemId())
-		{
-			case R.id.info:
-				AppUtils.info(getActivity(), mAppEntry);
-				return true;
-			case R.id.uninstall:
-				uninstall(mAppEntry);
-				return true;
-			case R.id.freeze:
-				AppUtils.freezeSystemApp(getActivity(), mAppEntry);
-				return true;
-			case R.id.unmark_bloat:
-				AppUtils.unmarkAsBloat(getActivity(), mAppEntry);
-				return true;
+		if (getUserVisibleHint()) {
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+			AppEntry mAppEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+	
+			switch(item.getItemId())
+			{
+				case R.id.info:
+					AppUtils.info(getActivity(), mAppEntry);
+					return true;
+				case R.id.uninstall:
+					uninstall(mAppEntry);
+					return true;
+				case R.id.freeze:
+					AppUtils.freezeSystemApp(getActivity(), mAppEntry);
+					return true;
+				case R.id.unmark_bloat:
+					AppUtils.unmarkAsBloat(getActivity(), mAppEntry);
+					return true;
+				default:
+					return true;
+			}
+		} else {
+			return false;
 		}
-		//return super.onContextItemSelected(item);
-		return true;
-	} else {
-		return false;
-	}
 	}
 
 	private void uninstall(final AppEntry appEntry)

@@ -58,9 +58,9 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
-		this.position = position;
+//		this.position = position;
 		this.appEntry = (AppEntry)getListView().getItemAtPosition(position);
-		Toast.makeText(getActivity(), position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getActivity(), position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
 
 		View childView = listView.getChildAt(position);
 		if(childView != null) {
@@ -68,7 +68,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		}
 		else
 		{
-			Toast.makeText(getActivity(), "childView == null", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "childView == null\ngetChildCount: " + listView.getChildCount() + "\nPlease long click.", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -83,31 +83,31 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	public boolean onContextItemSelected(MenuItem item)
 	{
-	if (getUserVisibleHint()) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-		AppEntry appEntry_should_be_working = (AppEntry)getListView().getItemAtPosition(info.position);
-		Toast.makeText(getActivity(), info.position + ":" + appEntry_should_be_working.toString(), Toast.LENGTH_SHORT).show();
-
-		switch(item.getItemId())
-		{
-			case R.id.info:
-				AppUtils.info(getActivity(), appEntry);
-				return true;
-			case R.id.mark_bloat:
-				AppUtils.markAsBloat(getActivity(), appEntry);
-				return true;
-			case R.id.uninstall:
-				uninstall(appEntry);
-				return true;
-			case R.id.freeze:
-				AppUtils.freezeSystemApp(getActivity(), appEntry);
-				return true;
+		if (getUserVisibleHint()) {
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+			AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+			Toast.makeText(getActivity(), info.position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
+			
+			switch(item.getItemId())
+			{
+				case R.id.info:
+					AppUtils.info(getActivity(), appEntry);
+					return true;
+				case R.id.mark_bloat:
+					AppUtils.markAsBloat(getActivity(), appEntry);
+					return true;
+				case R.id.uninstall:
+					uninstall(appEntry);
+					return true;
+				case R.id.freeze:
+					AppUtils.freezeSystemApp(getActivity(), appEntry);
+					return true;
+				default:
+					return true;
+			}
+		} else {
+			return false;
 		}
-//		return super.onContextItemSelected(item);
-		return true;
-	} else {
-		return false;
-	}
 	}
 
 	private void uninstall(final AppEntry appEntry)
