@@ -21,13 +21,13 @@ Known bugs
 
 Open Source
 ===========
-You can find the source code for this app at <https://github.com/snot/...>
+You can find the source code for this app at <https://github.com/snot/BloatwareRemover>
 
 
 Credits
 =======
-Icon designed by... .
-Thanks to Nawsnap for helping me hunt down bugs.
+* Icon designed by... .
+* Thanks to Nawsnap for helping me hunt down bugs.
 
 
 Contact
