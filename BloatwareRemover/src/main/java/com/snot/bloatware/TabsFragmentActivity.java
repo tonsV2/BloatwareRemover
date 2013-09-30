@@ -1,6 +1,5 @@
 package com.snot.bloatware;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
@@ -8,13 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TabHost;
-import android.widget.TabWidget;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.FragmentTransaction;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -37,7 +33,7 @@ import java.util.ArrayList;
 //}
 //
 
-public class TabsFragmentActivity extends FragmentActivity implements ActionBar.TabListener
+public class TabsFragmentActivity extends ActionBarActivity implements ActionBar.TabListener
 {
 	private final String TAG = this.getClass().getName();
 
@@ -52,7 +48,7 @@ public class TabsFragmentActivity extends FragmentActivity implements ActionBar.
 
 		ta = new TabsAdapter(getSupportFragmentManager());
 
-		actionBar = getActionBar();
+		actionBar = getSupportActionBar();
 		final ActionBar factionBar = actionBar;
 	// Set up the action bar.
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

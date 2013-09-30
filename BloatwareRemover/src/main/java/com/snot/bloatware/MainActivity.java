@@ -24,7 +24,7 @@ import android.widget.CheckBox;
 import android.content.SharedPreferences;
 
 
-import com.stericson.RootTools.RootTools;;
+import com.stericson.RootTools.RootTools;
 
 public class MainActivity extends TabsFragmentActivity {
 
