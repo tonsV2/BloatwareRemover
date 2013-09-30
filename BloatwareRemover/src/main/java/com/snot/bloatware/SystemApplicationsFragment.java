@@ -58,7 +58,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
-//		AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(position);
 		this.position = position;
 		this.appEntry = (AppEntry)getListView().getItemAtPosition(position);
 		Toast.makeText(getActivity(), position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
