@@ -26,6 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView;
 
 import com.snot.bloatware.loader.AppEntry;
 import com.snot.bloatware.loader.SysAppListLoader;
@@ -53,8 +55,31 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 		mAdapter = new AppListAdapter(getActivity());
 		setListAdapter(mAdapter);
 
+//		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id)
+//			{
+//				onListItemLongClick(position);
+//				return true;
+//			}
+//		});
+
 		getLoaderManager().initLoader(LOADER_ID, null, this);
 	}
+
+	private void onListItemLongClick(int position)
+	{
+		this.position = position;
+
+		Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+		// toggle boolean multipleSelection;
+		// if multipleSelection
+		// 	enable multiple selection
+		// 	update action bar
+		// 	select current list item
+		// ??
+	}
+
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
