@@ -55,7 +55,9 @@ public class BloatApplicationsFragment extends ListFragment implements LoaderMan
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
-		View childView = listView.getChildAt(position);
+		final int index = position - listView.getFirstVisiblePosition();
+		final View childView = listView.getChildAt(index);
+
 		if(childView != null) {
 			listView.showContextMenuForChild(childView);
 		}

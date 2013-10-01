@@ -36,7 +36,8 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 2;
 
-	private AppEntry appEntry;
+	private int position;
+//	private AppEntry appEntry;
 
 	public SystemApplicationsFragment() {
 	}
@@ -57,15 +58,18 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
-		this.appEntry = (AppEntry)getListView().getItemAtPosition(position);
+		this.position = position;
+//		this.appEntry = (AppEntry)getListView().getItemAtPosition(position);
 
-		View childView = listView.getChildAt(position);
+		final int index = position - listView.getFirstVisiblePosition();
+		final View childView = listView.getChildAt(index);
+
 		if(childView != null) {
 			listView.showContextMenuForChild(childView);
 		}
 		else
 		{
-			Toast.makeText(getActivity(), "childView == null\ngetChildCount: " + listView.getChildCount() + "\nPlease long click.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "childView == null", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -81,10 +85,15 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	public boolean onContextItemSelected(MenuItem item)
 	{
 		if (getUserVisibleHint()) {
-//			AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-//			AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(info.position);
-//			Toast.makeText(getActivity(), info.position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
-			
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+			AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+			// This really shouldn't happen since we are "within" getUserVisibleHint. However if it does happen we
+			//need to crash the app so the user doesn't perform an undesired action on the wrong app.
+			if(this.position != info.position)
+			{
+				throw new RuntimeException("this.position != info.position");
+			}
+
 			switch(item.getItemId())
 			{
 				case R.id.info:
