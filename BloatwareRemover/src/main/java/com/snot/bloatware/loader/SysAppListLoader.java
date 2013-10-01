@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +15,7 @@ import android.util.Log;
 
 import com.snot.bloatware.observer.InstalledAppsObserver;
 import com.snot.bloatware.observer.SystemLocaleObserver;
+import com.snot.bloatware.R;
 
 /**
  * An implementation of AsyncTaskLoader which loads a {@code List<AppEntry>}
@@ -21,10 +23,13 @@ import com.snot.bloatware.observer.SystemLocaleObserver;
  */
 public class SysAppListLoader extends AppListLoader {
 	private static final String TAG = "SysAppListLoader";
+	private List<String> bloatList;
 
 	public SysAppListLoader(Context ctx) {
 		super(ctx);
 		Log.v(TAG, "Called!");
+		String[] bloatArray = ctx.getResources().getStringArray(R.array.bloatware);
+		bloatList = Arrays.asList(bloatArray);
 	}
 
   @Override
@@ -38,7 +43,7 @@ public class SysAppListLoader extends AppListLoader {
     List<ApplicationInfo> apps = new ArrayList<ApplicationInfo>();
     for(ApplicationInfo applicationInfo : allApps)
     {
-        if(isSystemPackage(applicationInfo))
+        if(isSystemPackage(applicationInfo) && !isBloatPackage(applicationInfo))
 	{
 		apps.add(applicationInfo);
 	}
@@ -66,5 +71,8 @@ public class SysAppListLoader extends AppListLoader {
 		return((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
 	}
 
+	private boolean isBloatPackage(ApplicationInfo applicationInfo) {
+		return bloatList.contains(applicationInfo.packageName);
+	}
 }
 
