@@ -36,7 +36,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	private AppListAdapter mAdapter;
 	private static final int LOADER_ID = 2;
 
-	private int position;
 	private AppEntry appEntry;
 
 	public SystemApplicationsFragment() {
@@ -58,9 +57,7 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
-//		this.position = position;
 		this.appEntry = (AppEntry)getListView().getItemAtPosition(position);
-//		Toast.makeText(getActivity(), position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
 
 		View childView = listView.getChildAt(position);
 		if(childView != null) {
@@ -84,9 +81,9 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	public boolean onContextItemSelected(MenuItem item)
 	{
 		if (getUserVisibleHint()) {
-			AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-			AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(info.position);
-			Toast.makeText(getActivity(), info.position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
+//			AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+//			AppEntry appEntry = (AppEntry)getListView().getItemAtPosition(info.position);
+//			Toast.makeText(getActivity(), info.position + ":" + appEntry.toString(), Toast.LENGTH_SHORT).show();
 			
 			switch(item.getItemId())
 			{
