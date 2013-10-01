@@ -77,7 +77,6 @@ public class SystemApplicationsFragment extends ListFragment implements LoaderMa
 	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo)
 	{
 		super.onCreateContextMenu(menu, view, menuInfo);
-		menu.setHeaderTitle(getString(R.string.header_title));
 		MenuInflater inflater = getActivity().getMenuInflater();
 		inflater.inflate(R.menu.context_menu_system_applications, menu);
 	}

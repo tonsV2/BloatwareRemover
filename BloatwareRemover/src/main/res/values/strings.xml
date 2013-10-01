@@ -13,7 +13,6 @@
 	<string name="no_bloatware_applications">No bloatware found</string>
 	<string name="no_frozen_applications">No frozen applications</string>
 
-	<string name="header_title">Menu... TODO</string>
 	<string name="info">Info</string>
 	<string name="mark_bloat">Submit bloatware (Please contribute!)</string>
 	<string name="unmark_bloat">This app shouldn\'t be here!</string>
