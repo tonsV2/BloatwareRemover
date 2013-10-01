@@ -35,7 +35,7 @@ You can find the source code for this app at <https://github.com/snot/BloatwareR
 Credits
 =======
 * Icon designed by... .
-* Thanks to Nawsnap from <reddit.com> for helping me hunt down bugs.
+* Thanks to Nawsnap from <http://reddit.com> for helping me hunt down bugs.
 
 
 Contact
