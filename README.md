@@ -12,7 +12,7 @@ Features
 ========
 * Delete system apps
 * Freeze system apps
-* Detect bloatware (comes with list of know bloatware)
+* Detect bloatware (comes with list of known bloatware)
 
 
 Download
@@ -22,9 +22,7 @@ Download
 
 Known bugs
 ==========
-* After clicking and swiping back and forth a few times onclick stops working but simply doing a long click works the same.
 * Freezing Youtube on my nexus doesn't work. So there are probably other apps which are unfreezable as well. And to make matters worse it actually seems to ruin the apk.
-* Showing two settings entries in the menu... neither does anything.
 
 
 Open Source
