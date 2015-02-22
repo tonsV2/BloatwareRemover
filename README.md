@@ -15,11 +15,6 @@ Features
 * Detect bloatware (comes with list of known bloatware)
 
 
-Download
-========
-<https://play.google.com/store/apps/details?id=com.snot.bloatware>
-
-
 Known bugs
 ==========
 * Freezing Youtube on my nexus doesn't work. So there are probably other apps which are unfreezable as well. And to make matters worse it actually seems to ruin the apk.
